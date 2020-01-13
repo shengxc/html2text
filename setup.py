@@ -11,7 +11,7 @@ setup(
     name="ehtml2text",
     version=".".join(map(str, __import__("html2text").__version__)),
     description="Turn HTML into equivalent Markdown-structured text.",
-    long_description=readall("README.md"),
+    long_description="",
     long_description_content_type="text/markdown",
     author="Aaron Swartz",
     author_email="me@aaronsw.com",
