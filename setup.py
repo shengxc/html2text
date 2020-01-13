@@ -8,7 +8,7 @@ def readall(f):
 
 
 setup(
-    name="html2text",
+    name="ehtml2text",
     version=".".join(map(str, __import__("html2text").__version__)),
     description="Turn HTML into equivalent Markdown-structured text.",
     long_description=readall("README.md"),

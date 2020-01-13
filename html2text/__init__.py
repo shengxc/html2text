@@ -87,6 +87,8 @@ class HTML2Text(HTMLParser.HTMLParser):
         self.tag_callback = None
         self.open_quote = config.OPEN_QUOTE  # covered in cli
         self.close_quote = config.CLOSE_QUOTE  # covered in cli
+        self.enable_header = False
+        self.enable_escape_md_section = False
 
         if out is None:
             self.out = self.outtextf
@@ -338,7 +340,8 @@ class HTML2Text(HTMLParser.HTMLParser):
             self.p()
             if start:
                 self.inheader = True
-                self.o(hn(tag) * "#" + " ")
+                if self.enable_header:
+                    self.o(hn(tag) * "#" + " ")
             else:
                 self.inheader = False
                 return  # prevent redundant emphasis marks on headers
@@ -834,7 +837,7 @@ class HTML2Text(HTMLParser.HTMLParser):
                 self.maybe_automatic_link = None
                 self.empty_link = False
 
-        if not self.code and not self.pre and not entity_char:
+        if not self.code and not self.pre and not entity_char and self.enable_escape_md_section:
             data = escape_md_section(data, snob=self.escape_snob)
         self.preceding_data = data
         self.o(data, puredata=True)
